@@ -1,0 +1,37 @@
+syntax = "proto3";
+option go_package = "SortingMapReduce/proto";
+package proto;
+
+
+
+message ArrayInt32{
+  repeated int32 data = 1;
+}
+message Bool{
+  bool b = 1;
+}
+message PartialInputReduce{
+  string worker = 1;
+  repeated int32 data = 2;
+}
+message Tuple{
+  string worker = 1;
+  int32 min = 2;
+  int32 max = 3;
+}
+message Partition{
+  repeated Tuple partition = 1;
+  string Worker = 2;
+}
+message Worker{
+  string worker = 1;
+}
+// Servizio gRPC per i worker
+service WorkerService {
+  rpc MapExecute(ArrayInt32) returns (Bool);
+  rpc StartShuffle(Partition) returns (Bool);
+  rpc AddPartialInputReduce(PartialInputReduce) returns (Bool);
+  rpc Reduce(Worker) returns (Bool);
+}
+
+service MasterService{}

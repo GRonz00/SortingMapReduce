@@ -1,0 +1,46 @@
+services:
+  master:
+    build:
+      context: .
+      dockerfile: Dockerfile.master
+    environment:
+      - CONFIG_FILE=/app/config/config.json
+    volumes:
+      - ./config:/app/config
+    depends_on:
+      - worker_1
+      - worker_2
+      - worker_3
+      - worker_4
+  worker_1:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - RESULT_FILE=/app/result/result1.txt
+    volumes:
+      - ./result:/app/result
+  worker_2:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - RESULT_FILE=/app/result/result2.txt
+    volumes:
+      - ./result:/app/result
+  worker_3:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - RESULT_FILE=/app/result/result3.txt
+    volumes:
+      - ./result:/app/result
+  worker_4:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - RESULT_FILE=/app/result/result4.txt
+    volumes:
+      - ./result:/app/result

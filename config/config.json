@@ -1,0 +1,9 @@
+{
+  "master": "master:50051",
+  "workers": [
+    "worker_1:8888",
+    "worker_2:8888",
+    "worker_3:8888",
+    "worker_4:8888"
+  ]
+}
